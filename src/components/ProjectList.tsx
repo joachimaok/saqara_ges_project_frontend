@@ -89,7 +89,7 @@ const ProjectList: React.FC = () => {
     return <Alert message="Error" description={error} type="error" showIcon />;
   }
 
-  const items = projects.map((project) => ({
+  const items = projects.map((project: IProject) => ({
     key: project._id,
     label: project.name,
     children: (
