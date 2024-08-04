@@ -38,6 +38,10 @@ const ProjectList: React.FC = () => {
     navigate(`/projects/${projectId}`);
   };
 
+  const handleEditProject = (projectId: string) => {
+    navigate(`/projects/edit/${projectId}`);
+  };
+
   if (loading) {
     return <Spin />;
   }
@@ -56,6 +60,9 @@ const ProjectList: React.FC = () => {
             actions={[
               <Button key="view" onClick={() => handleViewProject(project._id)}>
                 View
+              </Button>,
+              <Button key="edit" onClick={() => handleEditProject(project._id)}>
+                Edit
               </Button>,
             ]}
           >

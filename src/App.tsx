@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import { useAuth } from './contexts/AuthContext';
 import CreateProject from './pages/project/CreateProject';
 import ProjectDetails from './pages/project/ProjectDetails';
+import EditProject from './pages/project/EditProject';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -40,6 +41,10 @@ const App: React.FC = () => {
         <Route
           path="/projects/:id"
           element={isAuthenticated ? <ProjectDetails /> : <Login />}
+        />
+        <Route
+          path="/projects/edit/:id"
+          element={isAuthenticated ? <EditProject /> : <Login />}
         />
       </Routes>
     </Router>

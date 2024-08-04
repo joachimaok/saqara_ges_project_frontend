@@ -15,3 +15,5 @@ export interface ICreateProjectForm {
   name: string;
   description?: string;
 }
+
+export interface IEditProjectForm extends ICreateProjectForm {}
