@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Card, Button, Modal, message, Space } from 'antd';
+import { Collapse, Card, Button, Modal, Space } from 'antd';
 import { ITask } from '../interfaces/task.interface';
 
 interface TaskListProps {
