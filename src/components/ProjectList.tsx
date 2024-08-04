@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { List, Card, Spin, Alert } from 'antd';
+import { List, Card, Spin, Alert, Button } from 'antd';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { IProject } from '../interfaces/project.interface';
 
 const ProjectList: React.FC = () => {
@@ -8,6 +9,7 @@ const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -22,8 +24,8 @@ const ProjectList: React.FC = () => {
         }
         const data = await response.json();
         setProjects(data);
-      } catch (error) {
-        setError((error as Error).message);
+      } catch (err) {
+        setError((err as Error).message);
       } finally {
         setLoading(false);
       }
@@ -31,6 +33,10 @@ const ProjectList: React.FC = () => {
 
     fetchProjects();
   }, [token]);
+
+  const handleViewProject = (projectId: string) => {
+    navigate(`/projects/${projectId}`);
+  };
 
   if (loading) {
     return <Spin />;
@@ -46,7 +52,13 @@ const ProjectList: React.FC = () => {
         itemLayout="horizontal"
         dataSource={projects}
         renderItem={(project) => (
-          <List.Item>
+          <List.Item
+            actions={[
+              <Button key="view" onClick={() => handleViewProject(project._id)}>
+                View
+              </Button>,
+            ]}
+          >
             <List.Item.Meta
               title={project.name}
               description={project.description}

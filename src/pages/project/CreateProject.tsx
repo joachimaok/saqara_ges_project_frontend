@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Card, Form, Input, Spin, Typography, Alert } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { ICreateProjectForm } from '../interfaces/project.interface';
+import { useAuth } from '../../contexts/AuthContext';
+import { ICreateProjectForm } from '../../interfaces/project.interface';
 
 const CreateProject: React.FC = () => {
   const { token } = useAuth();
