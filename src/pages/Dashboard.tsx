@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Button, Avatar, Card, Typography, Flex } from 'antd';
+import { Button, Avatar, Card, Typography, Flex, Divider } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import ProjectList from '../components/ProjectList';
@@ -42,6 +42,9 @@ const Dashboard: React.FC = () => {
           Create Project
         </Button>
       </Flex>
+
+      <Divider dashed />
+
       <ProjectList />
     </Card>
   );

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { List, Card, Spin, Alert, Button } from 'antd';
+import {
+  Collapse,
+  Card,
+  Spin,
+  Alert,
+  Button,
+  Modal,
+  message,
+  Space,
+} from 'antd';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { IProject } from '../interfaces/project.interface';
@@ -42,6 +51,36 @@ const ProjectList: React.FC = () => {
     navigate(`/projects/edit/${projectId}`);
   };
 
+  const handleDeleteProject = (projectId: string) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this project?',
+      content: 'This action cannot be undone.',
+      okText: 'Yes, delete it',
+      okType: 'danger',
+      cancelText: 'No, cancel',
+      onOk: async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/projects/${projectId}`,
+            {
+              method: 'DELETE',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+          if (!response.ok) {
+            throw new Error('Failed to delete project');
+          }
+          message.success('Project deleted successfully');
+          setProjects(projects.filter((project) => project._id !== projectId));
+        } catch (err) {
+          message.error((err as Error).message);
+        }
+      },
+    });
+  };
+
   if (loading) {
     return <Spin />;
   }
@@ -50,29 +89,28 @@ const ProjectList: React.FC = () => {
     return <Alert message="Error" description={error} type="error" showIcon />;
   }
 
+  const items = projects.map((project) => ({
+    key: project._id,
+    label: project.name,
+    children: (
+      <div>
+        <p>{project.description}</p>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Space size="middle">
+            <Button onClick={() => handleViewProject(project._id)}>View</Button>
+            <Button onClick={() => handleEditProject(project._id)}>Edit</Button>
+            <Button danger onClick={() => handleDeleteProject(project._id)}>
+              Delete
+            </Button>
+          </Space>
+        </div>
+      </div>
+    ),
+  }));
+
   return (
     <Card title="Your Projects">
-      <List
-        itemLayout="horizontal"
-        dataSource={projects}
-        renderItem={(project) => (
-          <List.Item
-            actions={[
-              <Button key="view" onClick={() => handleViewProject(project._id)}>
-                View
-              </Button>,
-              <Button key="edit" onClick={() => handleEditProject(project._id)}>
-                Edit
-              </Button>,
-            ]}
-          >
-            <List.Item.Meta
-              title={project.name}
-              description={project.description}
-            />
-          </List.Item>
-        )}
-      />
+      <Collapse accordion items={items} />
     </Card>
   );
 };
