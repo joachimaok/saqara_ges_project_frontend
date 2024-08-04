@@ -21,7 +21,9 @@ const FloatingMenu: React.FC = () => {
     <div className="floating-menu">
       <div className="user-info">
         <Avatar icon={<UserOutlined />} />
-        <Typography.Text>{userData?.username}</Typography.Text>
+        <Typography.Text>
+          {userData?.username.toLocaleUpperCase()}
+        </Typography.Text>
       </div>
       <Button
         type="primary"

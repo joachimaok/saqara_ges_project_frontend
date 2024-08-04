@@ -156,6 +156,39 @@ const ProjectDetails: React.FC = () => {
     }
   };
 
+  const handleCompleteTask = async (taskId: string) => {
+    try {
+      const task = project?.tasks.find((task) => task._id === taskId);
+      if (!task) {
+        throw new Error('Task not found');
+      }
+      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ completed: !task.completed }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update task');
+      }
+      const updatedTask = await response.json();
+      message.success('Task updated successfully');
+      setProject((prevProject) => {
+        if (!prevProject) return null;
+        return {
+          ...prevProject,
+          tasks: prevProject.tasks.map((task) =>
+            task._id === updatedTask._id ? updatedTask : task,
+          ),
+        };
+      });
+    } catch (err) {
+      message.error((err as Error).message);
+    }
+  };
+
   const showCreateTaskModal = () => {
     setEditingTask(null);
     form.resetFields();
@@ -188,6 +221,7 @@ const ProjectDetails: React.FC = () => {
         tasks={project?.tasks || []}
         onDelete={handleDeleteTask}
         onEdit={handleEditTask}
+        onComplete={handleCompleteTask}
       />
       <Modal
         title={editingTask ? 'Edit Task' : 'Create Task'}
