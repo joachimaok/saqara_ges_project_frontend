@@ -13,12 +13,14 @@ import { useAuth } from './contexts/AuthContext';
 import CreateProject from './pages/project/CreateProject';
 import ProjectDetails from './pages/project/ProjectDetails';
 import EditProject from './pages/project/EditProject';
+import FloatingMenu from './components/FloatingMenu';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
 
   return (
     <Router>
+      <FloatingMenu />
       <Routes>
         <Route
           path="/"

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, Spin, Alert, Button, Modal, Form, Input, message } from 'antd';
+import {
+  Card,
+  Spin,
+  Alert,
+  Button,
+  Modal,
+  Form,
+  Input,
+  message,
+  Divider,
+} from 'antd';
 import { useAuth } from '../../contexts/AuthContext';
 import { IProject } from '../../interfaces/project.interface';
 import TaskList from '../../components/TaskList';
@@ -167,11 +177,13 @@ const ProjectDetails: React.FC = () => {
   }
 
   return (
-    <Card title={project?.name}>
+    <Card title={`Project : ${project?.name}`}>
       <p>{project?.description}</p>
+      <Divider dashed />
       <Button type="primary" onClick={showCreateTaskModal}>
         Create Task
       </Button>
+      <Divider dashed />
       <TaskList
         tasks={project?.tasks || []}
         onDelete={handleDeleteTask}

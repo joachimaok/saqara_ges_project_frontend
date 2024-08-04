@@ -19,7 +19,8 @@ body {
   width: 1000px;
 }
 
-.title, .slogan {
+.title,
+.slogan {
   text-align: center;
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 .alert {
-  margin-bottom: 1.5rem
+  margin-bottom: 1.5rem;
 }
 
 /* profile */
