@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Card, Button, Modal, Space } from 'antd';
+import { Collapse, Card, Button, Modal, Space, Empty } from 'antd';
 import { ITask } from '../interfaces/task.interface';
 
 interface TaskListProps {
@@ -55,7 +55,11 @@ const TaskList: React.FC<TaskListProps> = ({
 
   return (
     <Card title="Tasks">
-      <Collapse accordion items={items} />
+      {tasks.length === 0 ? (
+        <Empty description="No tasks available" />
+      ) : (
+        <Collapse accordion items={items} />
+      )}
     </Card>
   );
 };

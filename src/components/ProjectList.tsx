@@ -8,6 +8,7 @@ import {
   Modal,
   message,
   Space,
+  Empty,
 } from 'antd';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -110,7 +111,11 @@ const ProjectList: React.FC = () => {
 
   return (
     <Card title="Your Projects">
-      <Collapse accordion items={items} />
+      {projects.length === 0 ? (
+        <Empty description="No projects available" />
+      ) : (
+        <Collapse accordion items={items} />
+      )}
     </Card>
   );
 };
