@@ -10,6 +10,7 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Dashboard from './pages/Dashboard';
 import { useAuth } from './contexts/AuthContext';
+import CreateProject from './pages/CreateProject';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -30,6 +31,10 @@ const App: React.FC = () => {
         <Route
           path="/dashboard"
           element={isAuthenticated ? <Dashboard /> : <Login />}
+        />
+        <Route
+          path="/create-project"
+          element={isAuthenticated ? <CreateProject /> : <Login />}
         />
       </Routes>
     </Router>
