@@ -60,7 +60,7 @@ const ProjectDetails: React.FC = () => {
   const handleDeleteTask = async (taskId: string) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_API_URL}/tasks`,
+        `${import.meta.env.VITE_SERVER_API_URL}/tasks/${taskId}`,
         {
           method: 'DELETE',
           headers: {
