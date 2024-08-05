@@ -1,30 +1,142 @@
-# React + TypeScript + Vite
+# Project Management Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
 
-Currently, two official plugins are available:
+- [Introduction](#introduction)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Introduction
 
-## Expanding the ESLint configuration
+Welcome to the Project Management Frontend! This project is a web application built with React and Ant Design, designed to help users manage projects and tasks efficiently. The application supports user authentication and authorization, ensuring that users can only access and modify their own data.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **User Authentication**: Register, login, and manage sessions securely.
+- **Project Management**: Create, view, update, and delete projects.
+- **Task Management**: Add, edit, delete, and complete tasks within projects.
+- **Responsive Design**: Mobile-friendly and responsive user interface.
+- **Access Control**: Ensure users can only access and modify their own projects and tasks.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Tech Stack
+
+- **Frontend**: React, TypeScript
+- **UI Framework**: Ant Design
+- **State Management**: React Context API
+- **Routing**: React Router
+- **HTTP Client**: Fetch API
+- **Backend**: NestJS (not included in this repository, see backend repository)
+
+## Installation
+
+To get started with the frontend, follow these steps:
+
+1. **Clone the repository**:
+
+   ```sh
+   git clone https://github.com/joachimaok/saqara_ges_project_frontend.git
+   cd project-management-frontend
+   ```
+
+2. **Install dependencies**:
+
+   ```sh
+   pnpm install
+   ```
+
+3. **Start the development server**:
+
+   ```sh
+   pnpm start
+   ```
+
+## Configuration
+
+Create a `.env` file in the root directory and add the following environment variables:
+
+```
+SERVER_API_URL=http://localhost:3000
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Replace the value of `SERVER_API_URL` with the URL of your backend API.
+
+## Usage
+
+- **Register**: Create a new account.
+- **Login**: Access your account.
+- **Dashboard**: View a list of your projects.
+- **Project Details**: View tasks within a project, create new tasks, edit or delete existing tasks.
+- **Create Project**: Add new projects.
+- **Edit Project**: Modify existing projects.
+- **Delete Project**: Remove projects you no longer need.
+
+## Project Structure
+
+```
+src/
+│
+├── Auth/
+│ ├── Login.tsx
+│ ├── Register.tsx
+│ └── ...
+│
+├── components/
+│ ├── ProjectList.tsx
+│ ├── TaskList.tsx
+│ └── ...
+│
+├── contexts/
+│ └── AuthContext.tsx
+│
+├── hooks/
+│ ├── useLogin.ts
+│ ├── useRegister.ts
+│ └── ...
+│
+├── interfaces/
+│ ├── IProject.ts
+│ ├── ITask.ts
+│ ├── IUser.ts
+│ └── ...
+│
+├── pages/
+│ ├── Dashboard.tsx
+│ ├── NotFound.tsx
+│ ├── AccessDenied.tsx
+│ ├── project/
+│ │ ├── ProjectDetails.tsx
+│ │ ├── EditProject.tsx
+│ │ ├── CreateProject.tsx
+│ │ └── ...
+│ └── ...
+│
+├── App.tsx
+├── main.tsx
+└── ...
+```
+
+## API Endpoints
+
+### Authentication
+
+- **POST** `/auth/register`: Register a new user
+- **POST** `/auth/login`: Login and receive a token
+
+### Projects
+
+- **GET** `/projects`: Get all projects for the authenticated user
+- **POST** `/projects`: Create a new project
+- **GET** `/projects/:id`: Get a specific project by ID
+- **PUT** `/projects/:id`: Update a project by ID
+- **DELETE** `/projects/:id`: Delete a project by ID
+
+### Tasks
+
+- **POST** `/tasks`: Create a new task
+- **PUT** `/tasks/:id`: Update a task by ID
+- **DELETE** `/tasks/:id`: Delete a task by ID

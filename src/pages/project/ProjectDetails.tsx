@@ -15,7 +15,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { IProject } from '../../interfaces/project.interface';
 import TaskList from '../../components/TaskList';
 import { ITask } from '../../interfaces/task.interface';
-import { IUser } from '../../interfaces/user.interface';
 
 const ProjectDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,11 +30,14 @@ const ProjectDetails: React.FC = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/projects/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          `${process.env.SERVER_API_URL}/projects/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
         if (!response.ok) {
           navigate('*');
         }
@@ -57,7 +59,7 @@ const ProjectDetails: React.FC = () => {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      const response = await fetch(`${process.env.SERVER_API_URL}/tasks`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -93,7 +95,7 @@ const ProjectDetails: React.FC = () => {
     description: string;
   }) => {
     try {
-      const response = await fetch('http://localhost:3000/tasks', {
+      const response = await fetch(`${process.env.SERVER_API_URL}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +131,7 @@ const ProjectDetails: React.FC = () => {
     if (!editingTask) return;
     try {
       const response = await fetch(
-        `http://localhost:3000/tasks/${editingTask._id}`,
+        `${process.env.SERVER_API_URL}/tasks/${editingTask._id}`,
         {
           method: 'PUT',
           headers: {
@@ -168,14 +170,17 @@ const ProjectDetails: React.FC = () => {
       if (!task) {
         throw new Error('Task not found');
       }
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${process.env.SERVER_API_URL}/tasks/${taskId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ completed: !task.completed }),
         },
-        body: JSON.stringify({ completed: !task.completed }),
-      });
+      );
       if (!response.ok) {
         throw new Error('Failed to update task');
       }

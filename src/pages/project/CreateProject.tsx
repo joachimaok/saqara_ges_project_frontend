@@ -14,7 +14,7 @@ const CreateProject: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:3000/projects', {
+      const response = await fetch(`${process.env.SERVER_API_URL}/projects`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

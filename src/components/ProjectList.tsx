@@ -24,7 +24,7 @@ const ProjectList: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:3000/projects', {
+        const response = await fetch(`${process.env.SERVER_API_URL}/projects`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -62,7 +62,7 @@ const ProjectList: React.FC = () => {
       onOk: async () => {
         try {
           const response = await fetch(
-            `http://localhost:3000/projects/${projectId}`,
+            `${process.env.SERVER_API_URL}/projects/${projectId}`,
             {
               method: 'DELETE',
               headers: {
