@@ -30,7 +30,7 @@ Welcome to the Project Management Frontend! This project is a web application bu
 - **State Management**: React Context API
 - **Routing**: React Router
 - **HTTP Client**: Fetch API
-- **Backend**: NestJS (not included in this repository, see backend repository)
+- **Backend**: NestJS (not included in this repository, see [backend repository](https://github.com/joachimaok/saqara_ges_project_backend))
 
 ## Installation
 
