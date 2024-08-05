@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Card,
   Spin,
@@ -15,16 +15,18 @@ import { useAuth } from '../../contexts/AuthContext';
 import { IProject } from '../../interfaces/project.interface';
 import TaskList from '../../components/TaskList';
 import { ITask } from '../../interfaces/task.interface';
+import { IUser } from '../../interfaces/user.interface';
 
 const ProjectDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { token } = useAuth();
+  const { token, userData } = useAuth();
   const [project, setProject] = useState<IProject | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [form] = Form.useForm();
   const [editingTask, setEditingTask] = useState<ITask | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -35,9 +37,13 @@ const ProjectDetails: React.FC = () => {
           },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch project');
+          navigate('*');
         }
-        const data = await response.json();
+        const data: IProject = await response.json();
+        if (data.user.username !== userData?.username) {
+          navigate('/access-denied');
+          return;
+        }
         setProject(data);
       } catch (err) {
         setError((err as Error).message);

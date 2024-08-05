@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Typography, Button, Divider } from 'antd';
+import { Card, Typography, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-const NotFound: React.FC = () => {
+const AccessDenied: React.FC = () => {
   const navigate = useNavigate();
 
   const handleGoHome = () => {
@@ -11,13 +11,10 @@ const NotFound: React.FC = () => {
 
   return (
     <Card className="form-container">
-      <Typography.Title level={2}>404 - Page Not Found</Typography.Title>
+      <Typography.Title level={2}>403 - Access Denied</Typography.Title>
       <Typography.Text>
-        The page you are looking for does not exist or is not yours!
+        You do not have permission to view this page.
       </Typography.Text>
-
-      <Divider dashed />
-
       <Button
         type="primary"
         onClick={handleGoHome}
@@ -29,4 +26,4 @@ const NotFound: React.FC = () => {
   );
 };
 
-export default NotFound;
+export default AccessDenied;

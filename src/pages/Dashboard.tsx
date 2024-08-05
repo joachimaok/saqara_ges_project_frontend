@@ -6,12 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import ProjectList from '../components/ProjectList';
 
 const Dashboard: React.FC = () => {
-  const { userData, logout } = useAuth();
+  const { userData } = useAuth();
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-  };
 
   const handleCreateProject = () => {
     navigate('/create-project');
@@ -24,18 +20,10 @@ const Dashboard: React.FC = () => {
         <Typography.Title level={2} className="username">
           Welcome {userData?.username}!
         </Typography.Title>
-        <Button
-          size="large"
-          type="primary"
-          className="profile-btn"
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
 
         <Button
           size="large"
-          type="default"
+          type="primary"
           className="profile-btn"
           onClick={handleCreateProject}
         >

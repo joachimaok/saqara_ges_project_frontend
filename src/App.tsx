@@ -15,6 +15,7 @@ import ProjectDetails from './pages/project/ProjectDetails';
 import EditProject from './pages/project/EditProject';
 import FloatingMenu from './components/FloatingMenu';
 import NotFound from './pages/NotFound';
+import AccessDenied from './pages/AccessDenied';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -49,6 +50,7 @@ const App: React.FC = () => {
           path="/projects/edit/:id"
           element={isAuthenticated ? <EditProject /> : <Login />}
         />
+        <Route path="/access-denied" element={<AccessDenied />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
