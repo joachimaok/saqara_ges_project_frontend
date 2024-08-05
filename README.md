@@ -32,7 +32,28 @@ Welcome to the Project Management Frontend! This project is a web application bu
 - **HTTP Client**: Fetch API
 - **Backend**: NestJS (not included in this repository, see [backend repository](https://github.com/joachimaok/saqara_ges_project_backend))
 
-## Installation
+## Prerequisites
+
+- Node.js (version 14.x or later)
+- `pnpm` package manager
+
+### Installing `pnpm`
+
+If you don't have `pnpm` installed, you can install it globally using npm:
+
+```bash
+npm install -g pnpm
+```
+
+Or, if you prefer using curl:
+
+```bash
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+For more information about pnpm, please refer to the [official documentation](https://pnpm.io/).
+
+## Getting Started
 
 To get started with the frontend, follow these steps:
 
