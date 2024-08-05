@@ -16,6 +16,9 @@ import EditProject from './pages/project/EditProject';
 import FloatingMenu from './components/FloatingMenu';
 import NotFound from './pages/NotFound';
 import AccessDenied from './pages/AccessDenied';
+import { Layout } from 'antd';
+import AppHeader from './components/AppHeader';
+import { Content } from 'antd/es/layout/layout';
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -23,36 +26,43 @@ const App: React.FC = () => {
   return (
     <Router>
       <FloatingMenu />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            !isAuthenticated ? <Register /> : <Navigate to="/dashboard" />
-          }
-        />
-        <Route
-          path="/login"
-          element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" />}
-        />
-        <Route
-          path="/dashboard"
-          element={isAuthenticated ? <Dashboard /> : <Login />}
-        />
-        <Route
-          path="/create-project"
-          element={isAuthenticated ? <CreateProject /> : <Login />}
-        />
-        <Route
-          path="/projects/:id"
-          element={isAuthenticated ? <ProjectDetails /> : <Login />}
-        />
-        <Route
-          path="/projects/edit/:id"
-          element={isAuthenticated ? <EditProject /> : <Login />}
-        />
-        <Route path="/access-denied" element={<AccessDenied />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Layout style={{ minHeight: '100vh' }}>
+        <AppHeader />
+        <Content style={{ padding: '20px 50px' }}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                !isAuthenticated ? <Register /> : <Navigate to="/dashboard" />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                !isAuthenticated ? <Login /> : <Navigate to="/dashboard" />
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={isAuthenticated ? <Dashboard /> : <Login />}
+            />
+            <Route
+              path="/create-project"
+              element={isAuthenticated ? <CreateProject /> : <Login />}
+            />
+            <Route
+              path="/projects/:id"
+              element={isAuthenticated ? <ProjectDetails /> : <Login />}
+            />
+            <Route
+              path="/projects/edit/:id"
+              element={isAuthenticated ? <EditProject /> : <Login />}
+            />
+            <Route path="/access-denied" element={<AccessDenied />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Content>
+      </Layout>
     </Router>
   );
 };

@@ -10,8 +10,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: #cbdbff;
+  background: #f6f6f6;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* form */
@@ -53,4 +55,25 @@ body {
 .profile-btn {
   margin-top: 1.3rem;
   width: 100%;
+}
+
+html,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-layout-header {
+  background: #fff;
+  padding: 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.ant-layout-content {
+  padding: 20px 50px;
 }
