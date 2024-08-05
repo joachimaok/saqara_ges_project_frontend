@@ -14,14 +14,17 @@ const CreateProject: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${process.env.SERVER_API_URL}/projects`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_API_URL}/projects`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(values),
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Failed to create project');

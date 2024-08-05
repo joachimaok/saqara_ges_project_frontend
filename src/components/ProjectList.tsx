@@ -24,11 +24,14 @@ const ProjectList: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${process.env.SERVER_API_URL}/projects`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_API_URL}/projects`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
@@ -62,7 +65,7 @@ const ProjectList: React.FC = () => {
       onOk: async () => {
         try {
           const response = await fetch(
-            `${process.env.SERVER_API_URL}/projects/${projectId}`,
+            `${import.meta.env.VITE_SERVER_API_URL}/projects/${projectId}`,
             {
               method: 'DELETE',
               headers: {

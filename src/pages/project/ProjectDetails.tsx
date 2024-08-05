@@ -31,7 +31,7 @@ const ProjectDetails: React.FC = () => {
     const fetchProject = async () => {
       try {
         const response = await fetch(
-          `${process.env.SERVER_API_URL}/projects/${id}`,
+          `${import.meta.env.VITE_SERVER_API_URL}/projects/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -59,12 +59,15 @@ const ProjectDetails: React.FC = () => {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      const response = await fetch(`${process.env.SERVER_API_URL}/tasks`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_API_URL}/tasks`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       if (!response.ok) {
         throw new Error('Failed to delete task');
       }
@@ -95,14 +98,17 @@ const ProjectDetails: React.FC = () => {
     description: string;
   }) => {
     try {
-      const response = await fetch(`${process.env.SERVER_API_URL}/tasks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_API_URL}/tasks`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ ...values, projectId: id }),
         },
-        body: JSON.stringify({ ...values, projectId: id }),
-      });
+      );
       if (!response.ok) {
         throw new Error('Failed to create task');
       }
@@ -131,7 +137,7 @@ const ProjectDetails: React.FC = () => {
     if (!editingTask) return;
     try {
       const response = await fetch(
-        `${process.env.SERVER_API_URL}/tasks/${editingTask._id}`,
+        `${import.meta.env.VITE_SERVER_API_URL}/tasks/${editingTask._id}`,
         {
           method: 'PUT',
           headers: {
@@ -171,7 +177,7 @@ const ProjectDetails: React.FC = () => {
         throw new Error('Task not found');
       }
       const response = await fetch(
-        `${process.env.SERVER_API_URL}/tasks/${taskId}`,
+        `${import.meta.env.VITE_SERVER_API_URL}/tasks/${taskId}`,
         {
           method: 'PUT',
           headers: {

@@ -80,10 +80,10 @@ To get started with the frontend, follow these steps:
 Create a `.env` file in the root directory and add the following environment variables:
 
 ```
-SERVER_API_URL=http://localhost:3000
+VITE_SERVER_API_URL=http://localhost:3000
 ```
 
-Replace the value of `SERVER_API_URL` with the URL of your backend API.
+Replace the value of `VITE_SERVER_API_URL` with the URL of your backend API.
 
 ## Usage
 

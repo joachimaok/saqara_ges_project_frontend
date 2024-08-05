@@ -16,7 +16,7 @@ const EditProject: React.FC = () => {
     const fetchProject = async () => {
       try {
         const response = await fetch(
-          `${process.env.SERVER_API_URL}/projects/${id}`,
+          `${import.meta.env.VITE_SERVER_API_URL}/projects/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ const EditProject: React.FC = () => {
     setError(null);
     try {
       const response = await fetch(
-        `${process.env.SERVER_API_URL}/projects/${id}`,
+        `${import.meta.env.VITE_SERVER_API_URL}/projects/${id}`,
         {
           method: 'PUT',
           headers: {

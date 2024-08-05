@@ -13,13 +13,16 @@ const useLogin = () => {
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch(`${process.env.SERVER_API_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER_API_URL}/auth/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(values),
-      });
+      );
 
       const data: ILoginResponse = await res.json();
 
