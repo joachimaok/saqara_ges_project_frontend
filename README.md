@@ -72,7 +72,7 @@ To get started with the frontend, follow these steps:
 3. **Start the development server**:
 
    ```sh
-   pnpm start
+   pnpm run dev
    ```
 
 ## Configuration
