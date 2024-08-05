@@ -8,7 +8,6 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
 
 ## Introduction
